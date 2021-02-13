@@ -40,13 +40,11 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  element.classList.add("added");
+  element.classList.toggle("added");
 
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
-  } else {
-    alert("Hey, Already added !");
   }
 };
 var timer;
@@ -70,10 +68,23 @@ const createSlider = () => {
   document.querySelector(".main").style.display = "block";
   // hide image aria
   imagesArea.style.display = "none";
-  const duration = document.getElementById("duration").value || 1000;
+  let duration = document.getElementById("duration").value || 1000;
 
   if (duration < 0) {
-    alert("Duration is less than zero! Give some positive values!");
+    duration = 1000;
+    sliders.forEach((slide) => {
+      let item = document.createElement("div");
+      item.className = "slider-item";
+      item.innerHTML = `<img class="w-100"
+    src="${slide}"
+    alt="">`;
+      sliderContainer.appendChild(item);
+    });
+    changeSlide(0);
+    timer = setInterval(function () {
+      slideIndex++;
+      changeSlide(slideIndex);
+    }, duration);
   } else {
     sliders.forEach((slide) => {
       let item = document.createElement("div");
@@ -88,9 +99,7 @@ const createSlider = () => {
       slideIndex++;
       changeSlide(slideIndex);
     }, duration);
-    
   }
-  
 };
 
 // change slider index
@@ -143,5 +152,5 @@ sliderBtn.addEventListener("click", function () {
 // spinner control(bonus part)
 const toggleSpinner = () => {
   const spinner = document.getElementById("loading-spinner");
-  spinner.classList.toggle('d-none');
+  spinner.classList.toggle("d-none");
 };
