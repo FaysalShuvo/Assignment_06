@@ -34,6 +34,8 @@ const getImages = (query) => {
   )
     .then((response) => response.json())
     .then((data) => {
+      const showError = document.getElementById("show-error");
+      let error = "";
       if (data.total === 0) {
         const showError = document.getElementById("show-error");
         let error = "";
@@ -48,12 +50,19 @@ const getImages = (query) => {
 
 let slideIndex = 0;
 const selectItem = (event, img) => {
+  
+
   let element = event.target;
+  // element.classList.add("added");
   element.classList.toggle("added");
 
   let item = sliders.indexOf(img);
+  console.log(item);
+  console.log(img);
   if (item === -1) {
     sliders.push(img);
+  } else {
+     sliders = sliders.filter((slider) => slider !== img);
   }
 };
 var timer;
