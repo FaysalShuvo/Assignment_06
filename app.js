@@ -33,8 +33,17 @@ const getImages = (query) => {
     `https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`
   )
     .then((response) => response.json())
-    .then((data) => showImages(data.hits))
-    .catch((err) => console.log(err));
+    .then((data) => {
+      if (data.total === 0) {
+        const showError = document.getElementById("show-error");
+        let error = "";
+        error = `<h2 class="error-part">Sorry! We didn't find any pic...</h2>`;
+        showError.innerHTML = error;
+      } else {
+        showImages(data.hits);
+      }
+    })
+    .catch((error) => console.log(error));
 };
 
 let slideIndex = 0;

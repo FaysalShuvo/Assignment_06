@@ -56,6 +56,21 @@ img {
   display: none;
 }
 
+.error-part {
+  color: white;
+  background-color: rgb(255, 0, 0);
+  height: 40px;
+  border-radius: 30px;
+  text-align: center;
+}
+.error-part:hover {
+  color: rgb(255, 181, 181);
+  background-color: rgba(255, 0, 0, 0.452);
+  height: 40px;
+  border-radius: 30px;
+  text-align: center;
+}
+
 @media (max-width: 767px) {
   .justify-content-around.align-items-center.mt-3.gallery-header.mb-2 {
     flex-direction: column;
